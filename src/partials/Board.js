@@ -8,7 +8,7 @@ export default class Board {
 
 	render(svg) {
 		// Create the rectangle element
-		let rect = document.createElementNS(SVG_NS, 'rect');
+		const rect = document.createElementNS(SVG_NS, 'rect');
 		rect.setAttributeNS(null, 'x', 0);
 		rect.setAttributeNS(null, 'y', 0);
 		rect.setAttributeNS(null, 'width', this.width);
@@ -18,7 +18,7 @@ export default class Board {
 		svg.appendChild(rect);
 
 		// Create the line element
-		let line = document.createElementNS(SVG_NS, 'line');
+		const line = document.createElementNS(SVG_NS, 'line');
 		line.setAttributeNS(null, 'x1', this.width / 2);
 		line.setAttributeNS(null, 'y1', 0);
 		line.setAttributeNS(null, 'x2', this.width / 2);
