@@ -14,6 +14,7 @@ export const PADDLE_SPEED = 10;
 // Ball
 export const BALL_COLOR = 'white';
 export const BALL_RADIUS = 8;
+export const BALL_SPEED = 10;
 // Controls
 export const P1_UP = 'w';
 export const P1_DOWN = 's';

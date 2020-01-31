@@ -61,6 +61,5 @@ export default class Game {
 		this.paddleP2.render(svg);
 		// Render Ball
 		this.ball.render(svg);
-		this.ball.ballMove();
 	}
 }

@@ -1,4 +1,4 @@
-import { SVG_NS, BALL_COLOR } from '../settings';
+import { SVG_NS, BALL_COLOR, BALL_SPEED } from '../settings';
 
 // Ball.js
 export default class Ball {
@@ -13,12 +13,18 @@ export default class Ball {
 	reset() {
 		this.x = this.boardWidth / 2;
 		this.y = this.boardHeight / 2;
+		// Set the velocity for the ball
 		this.vy = 0;
-		// Set the movement algorithms for the ball
 		while (this.vy === 0) {
-			this.vy = Math.random() * 10 - 5;
+			this.vy = Math.random() * BALL_SPEED - BALL_SPEED / 2;
 		}
 		this.vx = (6 - Math.abs(this.vy)) * this.direction;
+	}
+
+	wallCollision() {
+		if (this.y - this.radius <= 0 || this.y + this.radius >= this.boardHeight) {
+			this.vy = this.vy * -1;
+		}
 	}
 
 	ballMove() {
@@ -33,5 +39,7 @@ export default class Ball {
 		ball.setAttributeNS(null, 'r', this.radius);
 		ball.setAttributeNS(null, 'fill', BALL_COLOR);
 		svg.appendChild(ball);
+		this.ballMove();
+		this.wallCollision();
 	}
 }
