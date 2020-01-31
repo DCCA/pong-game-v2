@@ -3,7 +3,11 @@ import {
 	PADDLE_GAP,
 	PADDLE_WIDTH,
 	PADDLE_HEIGHT,
-	BALL_RADIUS
+	BALL_RADIUS,
+	P1_UP,
+	P1_DOWN,
+	P2_UP,
+	P2_DOWN
 } from '../settings';
 import Board from './Board';
 import Paddle from './Paddle';
@@ -24,14 +28,18 @@ export default class Game {
 			PADDLE_WIDTH,
 			PADDLE_HEIGHT,
 			PADDLE_GAP,
-			(this.height - PADDLE_HEIGHT) / 2
+			(this.height - PADDLE_HEIGHT) / 2,
+			P1_UP,
+			P1_DOWN
 		);
 		this.paddleP2 = new Paddle(
 			this.height,
 			PADDLE_WIDTH,
 			PADDLE_HEIGHT,
 			this.width - (PADDLE_WIDTH + PADDLE_GAP),
-			(this.height - PADDLE_HEIGHT) / 2
+			(this.height - PADDLE_HEIGHT) / 2,
+			P2_UP,
+			P2_DOWN
 		);
 		// Create Ball
 		this.ball = new Ball(BALL_RADIUS, this.width, this.height);

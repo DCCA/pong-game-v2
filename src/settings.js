@@ -10,6 +10,12 @@ export const ELEM_COLOR = 'white';
 export const PADDLE_GAP = 10;
 export const PADDLE_WIDTH = 8;
 export const PADDLE_HEIGHT = 56;
+export const PADDLE_SPEED = 10;
 // Ball
 export const BALL_COLOR = 'white';
 export const BALL_RADIUS = 8;
+// Controls
+export const P1_UP = 'w';
+export const P1_DOWN = 's';
+export const P2_UP = 'o';
+export const P2_DOWN = 'l';
