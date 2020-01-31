@@ -24,14 +24,14 @@ export default class Game {
 			PADDLE_WIDTH,
 			PADDLE_HEIGHT,
 			PADDLE_GAP,
-			this.height / 2 - PADDLE_HEIGHT / 2
+			(this.height - PADDLE_HEIGHT) / 2
 		);
 		this.paddleP2 = new Paddle(
 			this.height,
 			PADDLE_WIDTH,
 			PADDLE_HEIGHT,
-			this.width - 8 - PADDLE_GAP,
-			this.height / 2 - PADDLE_HEIGHT / 2
+			this.width - (PADDLE_WIDTH + PADDLE_GAP),
+			(this.height - PADDLE_HEIGHT) / 2
 		);
 		// Create Ball
 		this.ball = new Ball(BALL_RADIUS, this.width, this.height);
