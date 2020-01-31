@@ -150,6 +150,7 @@ table {
 
 html {
 	font-size: 16px;
+	color: #d6db93;
 }
 
 body {
@@ -159,6 +160,7 @@ body {
 	height: 100vh;
 	justify-content: center;
 	width: 100%;
+	background-color: #262169;
 }
 
 h1 {
@@ -167,8 +169,7 @@ h1 {
 	text-align: center;
 }
 
-.axis {
-	padding: 2rem;
-	border-top: solid;
-	border-left: solid;
+#game {
+	border: solid #d6db93;
+	border-radius: 0.4rem;
 }
