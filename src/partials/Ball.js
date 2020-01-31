@@ -5,6 +5,7 @@ import {
 	BALL_BOUNCE_SPEED,
 	BALL_STARTING_ANGLE_LIMIT
 } from '../settings';
+import Ping from '../../public/sounds/pong-01.wav';
 
 // Ball.js
 export default class Ball {
@@ -13,8 +14,9 @@ export default class Ball {
 		this.boardWidth = boardWidth;
 		this.boardHeight = boardHeight;
 		// Randomize the start Math.sign(Math.random() - 0.5);
-		this.direction = 1;
+		this.direction = Math.sign(Math.random() - 0.5);
 		this.reset();
+		this.pingSound = new Audio(Ping);
 	}
 
 	reset() {
@@ -25,20 +27,47 @@ export default class Ball {
 		while (this.vy === 0) {
 			this.vy = Math.random() * BALL_SPEED - BALL_SPEED / 2;
 		}
-		this.vx =
-			(BALL_SPEED / 2 + BALL_STARTING_ANGLE_LIMIT - Math.abs(this.vy)) *
-			this.direction;
+		this.vx = (6 - Math.abs(this.vy)) * this.direction;
 	}
 
-	wallCollision() {
+	wallCollision(paddleP1, paddleP2) {
+		// Check the collision on top and bottom
 		if (this.y - this.radius <= 0 || this.y + this.radius >= this.boardHeight) {
 			this.vy = this.vy * -BALL_BOUNCE_SPEED;
 		}
+		// Check collision on right and left side
+		if (this.x - this.radius >= this.boardWidth) {
+			paddleP1.increaseScore();
+			this.direction = -1;
+			this.reset();
+			console.log('P1: ' + paddleP1.score);
+		} else if (this.x + this.radius <= 0) {
+			paddleP2.increaseScore();
+			this.direction = 1;
+			this.reset();
+			console.log('P2: ' + paddleP2.score);
+		}
 	}
 
-	sideCollision() {
-		if (this.x + this.radius >= this.boardWidth || this.x - this.radius <= 0) {
-			this.vx = this.vx * -1;
+	paddleCollision(paddleP1, paddleP2) {
+		if (this.vx < 0) {
+			const p1 = paddleP1.getPaddlePosition();
+			const hitRight = this.x + this.radius <= p1.right;
+			const belowTop = this.y + this.radius / 2 >= p1.top;
+			const aboveBottom = this.y - this.radius / 2 <= p1.bottom;
+			if (hitRight && belowTop && aboveBottom) {
+				this.pingSound.play();
+				this.vx = this.vx * -1;
+			}
+		} else {
+			const p2 = paddleP2.getPaddlePosition();
+			const hitLeft = this.x - this.radius >= p2.left;
+			const belowTop = this.y + this.radius / 2 >= p2.top;
+			const aboveBottom = this.y - this.radius / 2 <= p2.bottom;
+			if (hitLeft && belowTop && aboveBottom) {
+				this.pingSound.play();
+				this.vx = this.vx * -1;
+			}
 		}
 	}
 
@@ -47,7 +76,7 @@ export default class Ball {
 		this.y += this.vy;
 	}
 
-	render(svg, players) {
+	render(svg, paddleP1, paddleP2) {
 		// Create the ball SVG
 		const ball = document.createElementNS(SVG_NS, 'circle');
 		ball.setAttributeNS(null, 'cx', this.x);
@@ -58,10 +87,8 @@ export default class Ball {
 		// Make ball move
 		this.ballMove();
 		// Check wall collisions
-		this.wallCollision();
-		this.sideCollision();
-		// Check players collisions
-		const playersTrack = players;
-		// console.log(playersTrack);
+		this.wallCollision(paddleP1, paddleP2);
+		// Check paddle collision
+		this.paddleCollision(paddleP1, paddleP2);
 	}
 }

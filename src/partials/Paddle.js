@@ -1,4 +1,4 @@
-import { SVG_NS, ELEM_COLOR, PADDLE_SPEED } from '../settings';
+import { SVG_NS, ELEM_COLOR, PADDLE_SPEED, PADDLE_GAP } from '../settings';
 
 export default class Paddle {
 	constructor(boardHeight, width, height, x, y, keyUp, keyDown) {
@@ -23,6 +23,16 @@ export default class Paddle {
 		});
 	}
 	// Methods
+	getPaddlePosition() {
+		const position = {
+			top: this.y,
+			left: this.x - PADDLE_GAP,
+			bottom: this.y + this.height,
+			right: this.x + this.width + PADDLE_GAP
+		};
+		return position;
+	}
+	// Set the movement for the paddles
 	moveUp() {
 		// Limit the paddle to the top limit of the board
 		this.y = Math.max(0, (this.y -= PADDLE_SPEED));
@@ -31,6 +41,15 @@ export default class Paddle {
 		// Limit the paddle to the bottom limit of the board
 		this.y = Math.min(this.boardHeight - this.height, (this.y += PADDLE_SPEED));
 	}
+
+	getScore() {
+		return this.score;
+	}
+
+	increaseScore() {
+		this.score += 1;
+	}
+
 	render(svg) {
 		// Create the rectangle element
 		const rect = document.createElementNS(SVG_NS, 'rect');

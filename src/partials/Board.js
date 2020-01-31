@@ -16,6 +16,8 @@ export default class Board {
 		rect.setAttributeNS(null, 'width', this.width);
 		rect.setAttributeNS(null, 'height', this.height);
 		rect.setAttributeNS(null, 'fill', BOARD_COLOR);
+		rect.setAttributeNS(null, 'stroke', ELEM_COLOR);
+		rect.setAttributeNS(null, 'stroke-width', 4);
 		// Append the rectangle
 		svg.appendChild(rect);
 
