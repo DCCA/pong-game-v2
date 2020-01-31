@@ -45,7 +45,7 @@ export default class Game {
 		// Create Ball
 		this.ball = new Ball(BALL_RADIUS, this.width, this.height);
 		// Create score constructor(x, y, size)
-		this.score = new Score(214, 30, 20);
+		this.score = new Score(this.width / 2 - 40, 30, 20);
 	}
 
 	render() {
@@ -65,6 +65,9 @@ export default class Game {
 		// Render Ball
 		this.ball.render(svg, this.paddleP1, this.paddleP2);
 		// Render Score
-		this.score.render(svg, `${this.paddleP1.score} vs. ${this.paddleP2.score}`);
+		this.score.render(
+			svg,
+			`${this.paddleP1.getScore()} vs. ${this.paddleP2.getScore()}`
+		);
 	}
 }
