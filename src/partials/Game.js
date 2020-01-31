@@ -12,6 +12,7 @@ import {
 import Board from './Board';
 import Paddle from './Paddle';
 import Ball from './Ball';
+import Score from './Score';
 
 export default class Game {
 	constructor(element, width, height) {
@@ -43,6 +44,8 @@ export default class Game {
 		);
 		// Create Ball
 		this.ball = new Ball(BALL_RADIUS, this.width, this.height);
+		// Create score constructor(x, y, size)
+		this.score = new Score(214, 30, 20);
 	}
 
 	render() {
@@ -61,5 +64,7 @@ export default class Game {
 		this.paddleP2.render(svg);
 		// Render Ball
 		this.ball.render(svg, this.paddleP1, this.paddleP2);
+		// Render Score
+		this.score.render(svg, `${this.paddleP1.score} vs. ${this.paddleP2.score}`);
 	}
 }

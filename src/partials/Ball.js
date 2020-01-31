@@ -25,7 +25,7 @@ export default class Ball {
 		// Set the velocity for the ball
 		this.vy = 0;
 		while (this.vy === 0) {
-			this.vy = Math.random() * BALL_SPEED - BALL_SPEED / 2;
+			this.vy = Math.random() * 10 - 5 / 2;
 		}
 		this.vx = (6 - Math.abs(this.vy)) * this.direction;
 	}
