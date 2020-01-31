@@ -1,4 +1,10 @@
-import { SVG_NS, PADDLE_GAP, PADDLE_WIDTH, PADDLE_HEIGHT } from '../settings';
+import {
+	SVG_NS,
+	PADDLE_GAP,
+	PADDLE_WIDTH,
+	PADDLE_HEIGHT,
+	BALL_RADIUS
+} from '../settings';
 import Board from './Board';
 import Paddle from './Paddle';
 import Ball from './Ball';
@@ -28,7 +34,7 @@ export default class Game {
 			this.height / 2 - PADDLE_HEIGHT / 2
 		);
 		// Create Ball
-		this.ball = new Ball(10, this.width, this.height);
+		this.ball = new Ball(BALL_RADIUS, this.width, this.height);
 	}
 
 	render() {

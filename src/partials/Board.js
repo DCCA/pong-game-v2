@@ -11,6 +11,8 @@ export default class Board {
 		const rect = document.createElementNS(SVG_NS, 'rect');
 		rect.setAttributeNS(null, 'x', 0);
 		rect.setAttributeNS(null, 'y', 0);
+		rect.setAttributeNS(null, 'rx', 10);
+		rect.setAttributeNS(null, 'ry', 10);
 		rect.setAttributeNS(null, 'width', this.width);
 		rect.setAttributeNS(null, 'height', this.height);
 		rect.setAttributeNS(null, 'fill', BOARD_COLOR);

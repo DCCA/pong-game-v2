@@ -11,3 +11,4 @@ export const PADDLE_WIDTH = 8;
 export const PADDLE_HEIGHT = 56;
 // Ball
 export const BALL_COLOR = 'white';
+export const BALL_RADIUS = 8;
