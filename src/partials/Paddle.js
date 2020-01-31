@@ -9,6 +9,7 @@ export default class Paddle {
 		this.y = y;
 		this.speed = 10;
 		this.score = 0;
+		// Add event listeners for keypress
 		document.addEventListener('keydown', event => {
 			switch (event.key) {
 				case keyUp:
@@ -23,18 +24,12 @@ export default class Paddle {
 	}
 	// Methods
 	moveUp() {
-		if (this.y <= 0) {
-			this.y;
-		} else {
-			this.y -= PADDLE_SPEED;
-		}
+		// Limit the paddle to the top limit of the board
+		this.y = Math.max(0, (this.y -= PADDLE_SPEED));
 	}
 	moveDown() {
-		if (this.y >= this.boardHeight - this.height) {
-			this.y;
-		} else {
-			this.y += PADDLE_SPEED;
-		}
+		// Limit the paddle to the bottom limit of the board
+		this.y = Math.min(this.boardHeight - this.height, (this.y += PADDLE_SPEED));
 	}
 	render(svg) {
 		// Create the rectangle element
