@@ -9,3 +9,5 @@ export const ELEM_COLOR = 'white';
 export const PADDLE_GAP = 10;
 export const PADDLE_WIDTH = 8;
 export const PADDLE_HEIGHT = 56;
+// Ball
+export const BALL_COLOR = 'white';

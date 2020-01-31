@@ -1,6 +1,7 @@
 import { SVG_NS, PADDLE_GAP, PADDLE_WIDTH, PADDLE_HEIGHT } from '../settings';
 import Board from './Board';
 import Paddle from './Paddle';
+import Ball from './Ball';
 
 export default class Game {
 	constructor(element, width, height) {
@@ -12,17 +13,11 @@ export default class Game {
 		// Create the board
 		this.board = new Board(this.width, this.height);
 		// Create paddles (boardHeight, width, height, x, y)
-		// Use the blueprint to create paddle for player 1
 		this.paddleP1 = new Paddle(
-			// Set board height
 			this.height,
-			// Set the width of the paddle
 			PADDLE_WIDTH,
-			// Set the height of the paddle
 			PADDLE_HEIGHT,
-			// Set the x value of the paddle
 			PADDLE_GAP,
-			// Set the y value of the paddle
 			this.height / 2 - PADDLE_HEIGHT / 2
 		);
 		this.paddleP2 = new Paddle(
@@ -32,6 +27,8 @@ export default class Game {
 			this.width - 8 - PADDLE_GAP,
 			this.height / 2 - PADDLE_HEIGHT / 2
 		);
+		// Create Ball
+		this.ball = new Ball(10, this.width, this.height);
 	}
 
 	render() {
@@ -46,6 +43,9 @@ export default class Game {
 		this.board.render(svg);
 		// Render the paddle for the P1
 		this.paddleP1.render(svg);
+		// Render the paddle for the P2
 		this.paddleP2.render(svg);
+		// Render Ball
+		this.ball.render(svg);
 	}
 }
