@@ -13,7 +13,6 @@ export default class Ball {
 		this.radius = radius;
 		this.boardWidth = boardWidth;
 		this.boardHeight = boardHeight;
-		// Randomize the start Math.sign(Math.random() - 0.5);
 		this.direction = Math.sign(Math.random() - 0.5);
 		this.reset();
 		this.pingSound = new Audio(Ping);
@@ -25,7 +24,7 @@ export default class Ball {
 		// Set the velocity for the ball
 		this.vy = 0;
 		while (this.vy === 0) {
-			this.vy = Math.floor(Math.random() * 10 - 5);
+			this.vy = Math.ceil(Math.random() * BALL_SPEED - BALL_SPEED / 2);
 		}
 		this.vx = (6 - Math.abs(this.vy)) * this.direction;
 	}
@@ -40,12 +39,12 @@ export default class Ball {
 			paddleP1.increaseScore();
 			this.direction = -1;
 			this.reset();
-			console.log('P1: ' + paddleP1.score);
+			// console.log('P1: ' + paddleP1.score);
 		} else if (this.x + this.radius <= 0) {
 			paddleP2.increaseScore();
 			this.direction = 1;
 			this.reset();
-			console.log('P2: ' + paddleP2.score);
+			// console.log('P2: ' + paddleP2.score);
 		}
 	}
 
@@ -73,7 +72,9 @@ export default class Ball {
 
 	ballMove() {
 		this.x += this.vx;
+		// console.log('vx ' + this.vx);
 		this.y += this.vy;
+		// console.log('vy' + this.vy);
 	}
 
 	render(svg, paddleP1, paddleP2) {

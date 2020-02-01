@@ -19,6 +19,7 @@ export default class Game {
 		this.element = element;
 		this.width = width;
 		this.height = height;
+		this.paused = true;
 		// Get the ID from HTML to render the game
 		this.gameElement = document.getElementById(this.element);
 		// Create the board
@@ -46,28 +47,36 @@ export default class Game {
 		this.ball = new Ball(BALL_RADIUS, this.width, this.height);
 		// Create score constructor(x, y, size)
 		this.score = new Score(this.width / 2 - 40, 30, 20);
+		// Add event listener for pause
+		document.addEventListener('keydown', event => {
+			if (event.key === ' ') {
+				this.paused = !this.paused;
+			}
+		});
 	}
 
 	render() {
 		// Create the game SVG element
-		this.gameElement.innerHTML = '';
-		const svg = document.createElementNS(SVG_NS, 'svg');
-		svg.setAttributeNS(null, 'width', this.width);
-		svg.setAttributeNS(null, 'height', this.height);
-		svg.setAttributeNS(null, 'viewBox', `0 0 ${this.width} ${this.height}`);
-		this.gameElement.appendChild(svg);
-		// Render Board
-		this.board.render(svg);
-		// Render the paddle for the P1
-		this.paddleP1.render(svg);
-		// Render the paddle for the P2
-		this.paddleP2.render(svg);
-		// Render Ball
-		this.ball.render(svg, this.paddleP1, this.paddleP2);
-		// Render Score
-		this.score.render(
-			svg,
-			`${this.paddleP1.getScore()} vs. ${this.paddleP2.getScore()}`
-		);
+		if (this.paused !== false) {
+			this.gameElement.innerHTML = '';
+			const svg = document.createElementNS(SVG_NS, 'svg');
+			svg.setAttributeNS(null, 'width', this.width);
+			svg.setAttributeNS(null, 'height', this.height);
+			svg.setAttributeNS(null, 'viewBox', `0 0 ${this.width} ${this.height}`);
+			this.gameElement.appendChild(svg);
+			// Render Board
+			this.board.render(svg);
+			// Render the paddle for the P1
+			this.paddleP1.render(svg);
+			// Render the paddle for the P2
+			this.paddleP2.render(svg);
+			// Render Ball
+			this.ball.render(svg, this.paddleP1, this.paddleP2);
+			// Render Score
+			this.score.render(
+				svg,
+				`${this.paddleP1.getScore()} vs. ${this.paddleP2.getScore()}`
+			);
+		}
 	}
 }
