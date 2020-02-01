@@ -5,12 +5,14 @@ import {
 	PADDLE_HEIGHT,
 	BALL_RADIUS,
 	PADDLE_SPEED,
+	WIN_SCORE,
 	KEYS
 } from '../settings';
 import Board from './Board';
 import Paddle from './Paddle';
 import Ball from './Ball';
 import Score from './Score';
+import WinMessage from './WinMessage';
 
 export default class Game {
 	constructor(element, width, height) {
@@ -18,6 +20,7 @@ export default class Game {
 		this.width = width;
 		this.height = height;
 		this.paused = false;
+		this.gameWon = false;
 		// Get the ID from HTML to render the game
 		this.gameElement = document.getElementById(this.element);
 		// Create the board
@@ -44,7 +47,9 @@ export default class Game {
 		// Create Ball
 		this.ball = new Ball(BALL_RADIUS, this.width, this.height);
 		// Create score constructor(x, y, size)
-		this.score = new Score(this.width / 2 - 40, 30, 20);
+		this.score = new Score(this.width / 2, 30, 20);
+		// Create win message
+		this.winMessage = new WinMessage(this.width / 2, this.height / 2, 40);
 		// Add event listener for pause
 		document.addEventListener('keydown', event => {
 			if (event.key === KEYS.paused) {
@@ -59,10 +64,22 @@ export default class Game {
 			}
 		});
 	}
+	gameWin(p1Score, p2Score) {
+		if (p1Score === WIN_SCORE) {
+			console.log('p1 won');
+			this.gameWon = true;
+			return 'P1 won';
+		} else if (p2Score === WIN_SCORE) {
+			console.log('p2 won');
+			this.gameWon = true;
+			return 'P2 won';
+		}
+	}
 
 	render() {
-		// Create the game SVG element
+		// Check if game is paused
 		if (this.paused === false) {
+			// Create the game SVG element
 			this.gameElement.innerHTML = '';
 			const svg = document.createElementNS(SVG_NS, 'svg');
 			svg.setAttributeNS(null, 'width', this.width);
@@ -82,6 +99,19 @@ export default class Game {
 				svg,
 				`${this.paddleP1.getScore()} vs. ${this.paddleP2.getScore()}`
 			);
+			// Check if game is won
+			const winningPlayer = this.gameWin(
+				this.paddleP1.getScore(),
+				this.paddleP2.getScore()
+			);
+			if (this.gameWon === true) {
+				this.winMessage.render(svg, `${winningPlayer}!`);
+				this.paused = true;
+				this.paddleP1.resetScore();
+				this.paddleP2.resetScore();
+				console.log(winningPlayer);
+				this.gameWon = false;
+			}
 		}
 	}
 }

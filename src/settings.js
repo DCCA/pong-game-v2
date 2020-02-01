@@ -8,6 +8,7 @@ Game Configuration
 export const GAME_WIDTH = 512;
 export const GAME_HEIGHT = 256;
 export const BOARD_COLOR = '#262169';
+export const WIN_SCORE = 3;
 /*
  *Paddle and Net Color
  */
