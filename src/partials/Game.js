@@ -7,7 +7,8 @@ import {
 	P1_UP,
 	P1_DOWN,
 	P2_UP,
-	P2_DOWN
+	P2_DOWN,
+	PADDLE_SPEED
 } from '../settings';
 import Board from './Board';
 import Paddle from './Paddle';
@@ -19,7 +20,7 @@ export default class Game {
 		this.element = element;
 		this.width = width;
 		this.height = height;
-		this.paused = true;
+		this.paused = false;
 		// Get the ID from HTML to render the game
 		this.gameElement = document.getElementById(this.element);
 		// Create the board
@@ -51,13 +52,20 @@ export default class Game {
 		document.addEventListener('keydown', event => {
 			if (event.key === ' ') {
 				this.paused = !this.paused;
+				if (this.paused === true) {
+					this.paddleP1.setSpeed(0);
+					this.paddleP2.setSpeed(0);
+				} else {
+					this.paddleP1.setSpeed(PADDLE_SPEED);
+					this.paddleP2.setSpeed(PADDLE_SPEED);
+				}
 			}
 		});
 	}
 
 	render() {
 		// Create the game SVG element
-		if (this.paused !== false) {
+		if (this.paused === false) {
 			this.gameElement.innerHTML = '';
 			const svg = document.createElementNS(SVG_NS, 'svg');
 			svg.setAttributeNS(null, 'width', this.width);

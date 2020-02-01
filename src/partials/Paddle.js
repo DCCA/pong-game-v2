@@ -7,7 +7,7 @@ export default class Paddle {
 		this.height = height;
 		this.x = x;
 		this.y = y;
-		this.speed = 10;
+		this.speed = PADDLE_SPEED;
 		this.score = 0;
 		// Add event listeners for keypress
 		document.addEventListener('keydown', event => {
@@ -32,14 +32,18 @@ export default class Paddle {
 		};
 		return position;
 	}
+	//
+	setSpeed(value) {
+		this.speed = value;
+	}
 	// Set the movement for the paddles
 	moveUp() {
 		// Limit the paddle to the top limit of the board
-		this.y = Math.max(0, (this.y -= PADDLE_SPEED));
+		this.y = Math.max(0, (this.y -= this.speed));
 	}
 	moveDown() {
 		// Limit the paddle to the bottom limit of the board
-		this.y = Math.min(this.boardHeight - this.height, (this.y += PADDLE_SPEED));
+		this.y = Math.min(this.boardHeight - this.height, (this.y += this.speed));
 	}
 
 	getScore() {
