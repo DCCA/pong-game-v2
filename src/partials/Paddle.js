@@ -32,7 +32,7 @@ export default class Paddle {
 		};
 		return position;
 	}
-	//
+	// Set speed value
 	setSpeed(value) {
 		this.speed = value;
 	}
@@ -45,7 +45,7 @@ export default class Paddle {
 		// Limit the paddle to the bottom limit of the board
 		this.y = Math.min(this.boardHeight - this.height, (this.y += this.speed));
 	}
-
+	// Get score of the paddles
 	getScore() {
 		return this.score;
 	}
