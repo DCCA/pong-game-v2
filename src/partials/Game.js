@@ -4,11 +4,8 @@ import {
 	PADDLE_WIDTH,
 	PADDLE_HEIGHT,
 	BALL_RADIUS,
-	P1_UP,
-	P1_DOWN,
-	P2_UP,
-	P2_DOWN,
-	PADDLE_SPEED
+	PADDLE_SPEED,
+	KEYS
 } from '../settings';
 import Board from './Board';
 import Paddle from './Paddle';
@@ -32,8 +29,8 @@ export default class Game {
 			PADDLE_HEIGHT,
 			PADDLE_GAP,
 			(this.height - PADDLE_HEIGHT) / 2,
-			P1_UP,
-			P1_DOWN
+			KEYS.p1Up,
+			KEYS.p1Down
 		);
 		this.paddleP2 = new Paddle(
 			this.height,
@@ -41,8 +38,8 @@ export default class Game {
 			PADDLE_HEIGHT,
 			this.width - (PADDLE_WIDTH + PADDLE_GAP),
 			(this.height - PADDLE_HEIGHT) / 2,
-			P2_UP,
-			P2_DOWN
+			KEYS.p2Up,
+			KEYS.p2Down
 		);
 		// Create Ball
 		this.ball = new Ball(BALL_RADIUS, this.width, this.height);
@@ -50,7 +47,7 @@ export default class Game {
 		this.score = new Score(this.width / 2 - 40, 30, 20);
 		// Add event listener for pause
 		document.addEventListener('keydown', event => {
-			if (event.key === ' ') {
+			if (event.key === KEYS.paused) {
 				this.paused = !this.paused;
 				if (this.paused === true) {
 					this.paddleP1.setSpeed(0);

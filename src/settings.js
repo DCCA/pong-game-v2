@@ -33,7 +33,10 @@ export const BALL_STARTING_ANGLE_LIMIT = 1;
 /*
  *Controls
  */
-export const P1_UP = 'w';
-export const P1_DOWN = 's';
-export const P2_UP = 'o';
-export const P2_DOWN = 'l';
+export const KEYS = {
+	p1Up: 'w',
+	p1Down: 's',
+	p2Up: 'o',
+	p2Down: 'l',
+	paused: ' '
+};
