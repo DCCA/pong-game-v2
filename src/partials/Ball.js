@@ -22,11 +22,12 @@ export default class Ball {
 		this.x = this.boardWidth / 2;
 		this.y = this.boardHeight / 2;
 		// Set the velocity for the ball
+		// Velocity has to be bigger than 0
 		this.vy = 0;
 		while (this.vy === 0) {
-			this.vy = Math.ceil(Math.random() * BALL_SPEED - BALL_SPEED / 2);
+			this.vy = Math.floor(Math.random() * 10 - 5);
 		}
-		this.vx = (6 - Math.abs(this.vy)) * this.direction;
+		this.vx = this.direction * (6 - Math.abs(this.vy));
 	}
 
 	wallCollision(paddleP1, paddleP2) {
@@ -37,11 +38,13 @@ export default class Ball {
 		// Check collision on right and left side
 		if (this.x - this.radius >= this.boardWidth) {
 			paddleP1.increaseScore();
+			paddleP1.setHeight();
 			this.direction = -1;
 			this.reset();
 			// console.log('P1: ' + paddleP1.score);
 		} else if (this.x + this.radius <= 0) {
 			paddleP2.increaseScore();
+			paddleP2.setHeight();
 			this.direction = 1;
 			this.reset();
 			// console.log('P2: ' + paddleP2.score);
@@ -72,9 +75,9 @@ export default class Ball {
 
 	ballMove() {
 		this.x += this.vx;
-		// console.log('vx ' + this.vx);
+		console.log('vx ' + this.vx);
 		this.y += this.vy;
-		// console.log('vy' + this.vy);
+		console.log('vy' + this.vy);
 	}
 
 	render(svg, paddleP1, paddleP2) {

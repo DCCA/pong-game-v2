@@ -1,4 +1,11 @@
-import { SVG_NS, ELEM_COLOR, PADDLE_SPEED, PADDLE_GAP } from '../settings';
+import {
+	SVG_NS,
+	ELEM_COLOR,
+	PADDLE_SPEED,
+	PADDLE_GAP,
+	PADDLE_REDUCE,
+	PADDLE_MIN_HEIGHT
+} from '../settings';
 
 export default class Paddle {
 	constructor(boardHeight, width, height, x, y, keyUp, keyDown) {
@@ -57,6 +64,14 @@ export default class Paddle {
 	increaseScore() {
 		this.score += 1;
 	}
+	// Set paddle height
+	setHeight() {
+		this.height = Math.max(
+			this.height - PADDLE_REDUCE * this.score,
+			PADDLE_MIN_HEIGHT
+		);
+		return this.height;
+	}
 
 	render(svg) {
 		// Create the rectangle element
@@ -65,6 +80,7 @@ export default class Paddle {
 		rect.setAttributeNS(null, 'y', this.y);
 		rect.setAttributeNS(null, 'width', this.width);
 		rect.setAttributeNS(null, 'height', this.height);
+		console.log(this.height);
 		rect.setAttributeNS(null, 'fill', ELEM_COLOR);
 		// Append the rectangle
 		svg.appendChild(rect);

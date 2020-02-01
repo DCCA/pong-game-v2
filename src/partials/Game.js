@@ -109,7 +109,6 @@ export default class Game {
 				this.paused = true;
 				this.paddleP1.resetScore();
 				this.paddleP2.resetScore();
-				console.log(winningPlayer);
 				this.gameWon = false;
 			}
 		}
