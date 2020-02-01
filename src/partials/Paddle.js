@@ -80,7 +80,6 @@ export default class Paddle {
 		rect.setAttributeNS(null, 'y', this.y);
 		rect.setAttributeNS(null, 'width', this.width);
 		rect.setAttributeNS(null, 'height', this.height);
-		console.log(this.height);
 		rect.setAttributeNS(null, 'fill', ELEM_COLOR);
 		// Append the rectangle
 		svg.appendChild(rect);

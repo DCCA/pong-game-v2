@@ -1,10 +1,4 @@
-import {
-	SVG_NS,
-	BALL_COLOR,
-	BALL_SPEED,
-	BALL_BOUNCE_SPEED,
-	BALL_STARTING_ANGLE_LIMIT
-} from '../settings';
+import { SVG_NS, BALL_COLOR, BALL_SPEED, BALL_BOUNCE_SPEED } from '../settings';
 import Ping from '../../public/sounds/pong-01.wav';
 
 // Ball.js
@@ -16,6 +10,7 @@ export default class Ball {
 		this.direction = Math.sign(Math.random() - 0.5);
 		this.reset();
 		this.pingSound = new Audio(Ping);
+		this.paddleCollisionCounter = 0;
 	}
 
 	reset() {
@@ -28,6 +23,7 @@ export default class Ball {
 			this.vy = Math.floor(Math.random() * 10 - 5);
 		}
 		this.vx = this.direction * (6 - Math.abs(this.vy));
+		this.paddleCollisionCounter = 0;
 	}
 
 	wallCollision(paddleP1, paddleP2) {
@@ -41,13 +37,11 @@ export default class Ball {
 			paddleP1.setHeight();
 			this.direction = -1;
 			this.reset();
-			// console.log('P1: ' + paddleP1.score);
 		} else if (this.x + this.radius <= 0) {
 			paddleP2.increaseScore();
 			paddleP2.setHeight();
 			this.direction = 1;
 			this.reset();
-			// console.log('P2: ' + paddleP2.score);
 		}
 	}
 
@@ -60,6 +54,7 @@ export default class Ball {
 			if (hitRight && belowTop && aboveBottom) {
 				this.pingSound.play();
 				this.vx = this.vx * -1;
+				this.paddleCollisionCounter++;
 			}
 		} else {
 			const p2 = paddleP2.getPaddlePosition();
@@ -68,16 +63,15 @@ export default class Ball {
 			const aboveBottom = this.y - this.radius / 2 <= p2.bottom;
 			if (hitLeft && belowTop && aboveBottom) {
 				this.pingSound.play();
-				this.vx = this.vx * -1;
+				this.vx = (this.vx + BALL_SPEED * this.paddleCollisionCounter) * -1;
+				this.paddleCollisionCounter++;
 			}
 		}
 	}
 
 	ballMove() {
 		this.x += this.vx;
-		console.log('vx ' + this.vx);
 		this.y += this.vy;
-		console.log('vy' + this.vy);
 	}
 
 	render(svg, paddleP1, paddleP2) {

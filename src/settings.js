@@ -27,12 +27,9 @@ export const PADDLE_REDUCE = 2;
  */
 export const BALL_COLOR = '#d6db93';
 export const BALL_RADIUS = 8;
-export const BALL_SPEED = 10;
+export const BALL_SPEED = 0.25;
 // Do not increase beyond 0 to .10
 export const BALL_BOUNCE_SPEED = 1;
-// This value does not let the X velocity value to be 0.
-// If it is zero, the ball wound stay bouncing in the middle of the court
-export const BALL_STARTING_ANGLE_LIMIT = 1;
 /*
  *Controls
  */
