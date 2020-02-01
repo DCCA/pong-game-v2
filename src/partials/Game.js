@@ -21,6 +21,7 @@ export default class Game {
 		this.height = height;
 		this.paused = false;
 		this.gameWon = false;
+		this.matchPoint = false;
 		// Get the ID from HTML to render the game
 		this.gameElement = document.getElementById(this.element);
 		// Create the board
@@ -64,6 +65,7 @@ export default class Game {
 			}
 		});
 	}
+	// Check game win
 	gameWin(p1Score, p2Score) {
 		if (p1Score === WIN_SCORE) {
 			console.log('p1 won');
@@ -73,6 +75,14 @@ export default class Game {
 			console.log('p2 won');
 			this.gameWon = true;
 			return 'P2 won';
+		}
+	}
+	// Check match point
+	isMatchPoint(p1Score, p2Score) {
+		if (p1Score === WIN_SCORE - 1 || p2Score === WIN_SCORE - 1) {
+			this.matchPoint = true;
+		} else {
+			this.matchPoint = false;
 		}
 	}
 
@@ -86,8 +96,10 @@ export default class Game {
 			svg.setAttributeNS(null, 'height', this.height);
 			svg.setAttributeNS(null, 'viewBox', `0 0 ${this.width} ${this.height}`);
 			this.gameElement.appendChild(svg);
+			// Check if is match point
+			this.isMatchPoint(this.paddleP1.getScore(), this.paddleP2.getScore());
 			// Render Board
-			this.board.render(svg);
+			this.board.render(svg, this.matchPoint);
 			// Render the paddle for the P1
 			this.paddleP1.render(svg);
 			// Render the paddle for the P2
@@ -99,6 +111,7 @@ export default class Game {
 				svg,
 				`${this.paddleP1.getScore()} vs. ${this.paddleP2.getScore()}`
 			);
+
 			// Check if game is won
 			const winningPlayer = this.gameWin(
 				this.paddleP1.getScore(),
