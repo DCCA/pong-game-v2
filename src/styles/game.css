@@ -168,3 +168,23 @@ h1 {
 	margin-bottom: 1rem;
 	text-align: center;
 }
+
+.flex {
+	display: flex;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.justify-between {
+	justify-content: space-between;
+}
+
+.center {
+	text-align: center;
+}
+
+.hide {
+	display: none;
+}

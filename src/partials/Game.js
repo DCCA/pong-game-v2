@@ -19,7 +19,7 @@ export default class Game {
 		this.element = element;
 		this.width = width;
 		this.height = height;
-		this.paused = false;
+		this.paused = true;
 		this.gameWon = false;
 		this.matchPoint = false;
 		// Get the ID from HTML to render the game
@@ -89,6 +89,8 @@ export default class Game {
 	render() {
 		// Check if game is paused
 		if (this.paused === false) {
+			const messageToStart = document.getElementById('start-msg');
+			messageToStart.setAttribute('class', 'hide');
 			// Create the game SVG element
 			this.gameElement.innerHTML = '';
 			const svg = document.createElementNS(SVG_NS, 'svg');

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>Pong</title>
+		<title>Cyborg Pong</title>
 		<link
 			rel="icon"
 			type="image/png"
@@ -11,9 +11,28 @@
 	</head>
 	<body>
 		<div class="game-wrapper">
-			<h1>Pong!</h1>
+			<h1>Cyborg Pong!</h1>
+			<h3 id="start-msg" class="center">
+				When you are ready, press space bar to start
+			</h3>
 			<div id="game"></div>
 			<!-- Rough-out your SVG mark-up here to start... -->
+			<div class="flex align-center justify-between">
+				<div class="center">
+					<h3>P1 Control</h3>
+					<p>Up: <span id="p1-up"></span></p>
+					<p>Down: <span id="p1-down"></span></p>
+				</div>
+				<div>
+					<p>Pause: <span id="pause"></span></p>
+				</div>
+
+				<div class="center">
+					<h3>P2 Control</h3>
+					<p>Up: <span id="p2-up"></span></p>
+					<p>Down: <span id="p2-down"></span></p>
+				</div>
+			</div>
 		</div>
 		<script type="text/javascript" src="./src/index.js"></script>
 	</body>

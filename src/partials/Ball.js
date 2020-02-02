@@ -1,5 +1,6 @@
 import { SVG_NS, BALL_COLOR, BALL_SPEED, BALL_BOUNCE_SPEED } from '../settings';
-import Ping from '../../public/sounds/pong-01.wav';
+import Ping from '../../public/sounds/laser_gun.wav';
+import Loser from '../../public/sounds/loser.wav';
 
 // Ball.js
 export default class Ball {
@@ -10,6 +11,7 @@ export default class Ball {
 		this.direction = Math.sign(Math.random() - 0.5);
 		this.reset();
 		this.pingSound = new Audio(Ping);
+		this.loserSound = new Audio(Loser);
 		this.paddleCollisionCounter = 0;
 	}
 
@@ -36,11 +38,13 @@ export default class Ball {
 			paddleP1.increaseScore();
 			paddleP1.setHeight();
 			this.direction = -1;
+			this.loserSound.play();
 			this.reset();
 		} else if (this.x + this.radius <= 0) {
 			paddleP2.increaseScore();
 			paddleP2.setHeight();
 			this.direction = 1;
+			this.loserSound.play();
 			this.reset();
 		}
 	}
