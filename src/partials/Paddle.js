@@ -83,5 +83,6 @@ export default class Paddle {
 		rect.setAttributeNS(null, 'fill', ELEM_COLOR);
 		// Append the rectangle
 		svg.appendChild(rect);
+		//
 	}
 }

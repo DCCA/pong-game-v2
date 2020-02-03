@@ -57,7 +57,7 @@ export default class Ball {
 			const aboveBottom = this.y - this.radius / 2 <= p1.bottom;
 			if (hitRight && belowTop && aboveBottom) {
 				this.pingSound.play();
-				this.vx = this.vx * -1;
+				this.vx = (this.vx - BALL_SPEED * this.paddleCollisionCounter) * -1;
 				this.paddleCollisionCounter++;
 			}
 		} else {

@@ -1,5 +1,4 @@
-import { SVG_NS, BOARD_COLOR, ELEM_COLOR, WIN_SCORE } from '../settings';
-import { truncate } from 'fs';
+import { SVG_NS, BOARD_COLOR, ELEM_COLOR } from '../settings';
 
 export default class Board {
 	constructor(width, height) {
@@ -48,6 +47,9 @@ export default class Board {
 			text.setAttributeNS(null, 'fill', ELEM_COLOR);
 			text.textContent = 'MATCH POINT';
 			svg.appendChild(text);
+		} else {
+			this.background = BOARD_COLOR;
+			rect.setAttributeNS(null, 'fill', this.background);
 		}
 	}
 }
