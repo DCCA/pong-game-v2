@@ -6,6 +6,8 @@ A Pong game made using vanilla JS and SVGs
 
 - Every time a player hits the ball, the speed of the ball is increased
 - Every time a player scores, his paddle get smaller
+- The winner is declared when reaching 8 points
+- The court turns red when is the match point
 
 ## How to run the game
 
